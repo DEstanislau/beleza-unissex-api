@@ -7,6 +7,11 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
+      identifier: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
+      },
       name: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -24,6 +29,30 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
         allowNull: false,
+      },
+      cep: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      address: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      house_number: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      district: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      city: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      uf: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       created_at: {
         type: Sequelize.DATE,

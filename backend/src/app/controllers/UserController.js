@@ -5,13 +5,17 @@ import Cache from '../../lib/Cache';
 
 class UserController {
   async store(req, res) {
-    const userExists = await User.findOne({ where: { email: req.body.email } });
+    const userExists = await User.findOne({
+      where: { identifier: req.body.identifier },
+    });
 
     if (userExists) {
       return res.status(400).json({ error: 'User already exists' });
     }
 
-    const { id, name, email, provider } = await User.create(req.body);
+    const { id, name, email, identifier, provider } = await User.create(
+      req.body
+    );
 
     if (provider) {
       await Cache.invalidate('providers');
@@ -21,17 +25,28 @@ class UserController {
       id,
       name,
       email,
+      identifier,
       provider,
     });
   }
 
   async update(req, res) {
-    const { email, oldPassword } = req.body;
+    const {
+      email,
+      identifier,
+      oldPassword,
+      cep,
+      address,
+      house_number,
+      district,
+      city,
+      uf,
+    } = req.body;
 
     const user = await User.findByPk(req.userId);
 
     if (email !== user.email) {
-      const userExists = await User.findOne({ where: { email } });
+      const userExists = await User.findOne({ where: { identifier } });
 
       if (userExists) {
         return res.status(400).json({ error: 'User already exists' });
@@ -59,6 +74,13 @@ class UserController {
       name,
       email,
       avatar,
+      identifier,
+      cep,
+      address,
+      house_number,
+      district,
+      city,
+      uf,
     });
   }
 }

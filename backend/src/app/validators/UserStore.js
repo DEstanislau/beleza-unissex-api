@@ -6,6 +6,7 @@ export default async (req, res, next) => {
       name: Yup.string().required(),
       email: Yup.string().email().required(),
       password: Yup.string().required().min(6),
+      identifier: Yup.string().required().max(11),
     });
 
     await schema.validate(req.body, { abortEarly: false });

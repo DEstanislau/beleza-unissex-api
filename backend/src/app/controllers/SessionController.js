@@ -22,13 +22,32 @@ class SessionController {
       return res.status(401).json({ error: 'Password does not match' });
     }
 
-    const { id, name, avatar, provider } = user;
+    const {
+      id,
+      name,
+      identifier,
+      cep,
+      address,
+      house_number,
+      district,
+      city,
+      uf,
+      provider,
+      avatar,
+    } = user;
 
     return res.json({
       user: {
         id,
         name,
         email,
+        identifier,
+        cep,
+        address,
+        house_number,
+        district,
+        city,
+        uf,
         provider,
         avatar,
       },
