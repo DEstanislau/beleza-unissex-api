@@ -13,11 +13,13 @@ import AppointmentController from './app/controllers/AppointmentController';
 import ScheduleController from './app/controllers/ScheduleController';
 import NotificationController from './app/controllers/NotificationController';
 import AvailableController from './app/controllers/AvailableController';
+import ResetController from './app/controllers/ResetController';
 
-import validateUserStore from './app/validators/UserStore';
-import validateUserUpdate from './app/validators/UserUpdate';
-import validateSessionStore from './app/validators/SessionStore';
-import validateAppointmentStore from './app/validators/AppointmentStore';
+import ValidateUserStore from './app/validators/UserStore';
+import ValidateUserUpdate from './app/validators/UserUpdate';
+import ValidateSessionStore from './app/validators/SessionStore';
+import ValidateAppointmentStore from './app/validators/AppointmentStore';
+import ValidateForgotPassword from './app/validators/ForgotPassword';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -31,17 +33,14 @@ const bruteStore = new BruteRedis({
 
 const bruteForce = new Brute(bruteStore);
 
-routes.post('/users', validateUserStore, UserController.store);
-routes.post(
-  '/sessions',
-  bruteForce.prevent,
-  validateSessionStore,
-  SessionController.store
-);
+routes.post('/users', ValidateUserStore, UserController.store);
+routes.post('/sessions', ValidateSessionStore, SessionController.store);
+
+routes.post('/reset', ValidateForgotPassword, ResetController.forgotPassword);
 
 routes.use(authMiddleware);
 
-routes.put('/users', validateUserUpdate, UserController.update);
+routes.put('/users', ValidateUserUpdate, UserController.update);
 
 routes.get('/providers', ProviderController.index);
 routes.get('/providers/:providerId/available', AvailableController.index);
@@ -49,7 +48,7 @@ routes.get('/providers/:providerId/available', AvailableController.index);
 routes.get('/appointments', AppointmentController.index);
 routes.post(
   '/appointments',
-  validateAppointmentStore,
+  ValidateAppointmentStore,
   AppointmentController.store
 );
 routes.delete('/appointments/:id', AppointmentController.delete);
