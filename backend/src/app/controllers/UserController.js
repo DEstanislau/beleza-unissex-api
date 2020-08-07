@@ -33,8 +33,8 @@ class UserController {
   async update(req, res) {
     const {
       email,
-      identifier,
       oldPassword,
+      identifier,
       cep,
       address,
       house_number,
@@ -46,7 +46,7 @@ class UserController {
     const user = await User.findByPk(req.userId);
 
     if (email !== user.email) {
-      const userExists = await User.findOne({ where: { identifier } });
+      const userExists = await User.findOne({ where: { email } });
 
       if (userExists) {
         return res.status(400).json({ error: 'User already exists' });
@@ -73,8 +73,8 @@ class UserController {
       id,
       name,
       email,
-      avatar,
       identifier,
+      avatar,
       cep,
       address,
       house_number,

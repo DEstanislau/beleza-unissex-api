@@ -1,6 +1,9 @@
 import User from '../models/User';
 import crypto from 'crypto';
 
+import ResetPasswordMail from '../jobs/ResetPasswordMail';
+import Queue from '../../lib/Queue';
+
 class ResetController {
   async forgotPassword(req, res) {
     const { identifier, email } = req.body;
@@ -16,7 +19,18 @@ class ResetController {
 
     const token = crypto.randomBytes(3).toString('hex');
 
-    return res.json(token);
+    user.update({
+      password: token,
+    });
+
+    await Queue.add(ResetPasswordMail.key, {
+      user,
+      token,
+    });
+
+    return res.json({
+      message: 'Email Successfully sent',
+    });
   }
 }
 

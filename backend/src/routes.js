@@ -36,7 +36,7 @@ const bruteForce = new Brute(bruteStore);
 routes.post('/users', ValidateUserStore, UserController.store);
 routes.post('/sessions', ValidateSessionStore, SessionController.store);
 
-routes.post('/reset', ValidateForgotPassword, ResetController.forgotPassword);
+routes.put('/reset', ValidateForgotPassword, ResetController.forgotPassword);
 
 routes.use(authMiddleware);
 
