@@ -7,7 +7,7 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      name: {
+      name_product: {
         allowNull: false,
         type: Sequelize.STRING,
       },
@@ -21,6 +21,9 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelet: 'SET NULL',
         allowNull: true,
+      },
+      canceled_at: {
+        type: sequelize.DATE,
       },
       created_at: {
         type: Sequelize.DATE,

@@ -14,6 +14,7 @@ import ScheduleController from './app/controllers/ScheduleController';
 import NotificationController from './app/controllers/NotificationController';
 import AvailableController from './app/controllers/AvailableController';
 import ResetController from './app/controllers/ResetController';
+import ProductController from './app/controllers/ProductController';
 
 import ValidateUserStore from './app/validators/UserStore';
 import ValidateUserUpdate from './app/validators/UserUpdate';
@@ -52,6 +53,10 @@ routes.post(
   AppointmentController.store
 );
 routes.delete('/appointments/:id', AppointmentController.delete);
+
+routes.get('/products', ProductController.index);
+routes.post('/products', ProductController.store);
+routes.delete('/products/:id', ProductController.delete);
 
 routes.get('/schedule', ScheduleController.index);
 

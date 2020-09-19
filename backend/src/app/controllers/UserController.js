@@ -1,7 +1,7 @@
 import User from '../models/User';
 import File from '../models/File';
 
-import Cache from '../../lib/Cache';
+// import Cache from '../../lib/Cache';
 
 class UserController {
   async store(req, res) {
@@ -17,9 +17,9 @@ class UserController {
       req.body
     );
 
-    if (provider) {
-      await Cache.invalidate('providers');
-    }
+    // if (provider) {
+    //   await Cache.invalidate('providers');
+    // }
 
     return res.json({
       id,
@@ -32,6 +32,9 @@ class UserController {
 
   async update(req, res) {
     const {
+      shop_name,
+      tel,
+      cel,
       email,
       oldPassword,
       identifier,
@@ -71,6 +74,9 @@ class UserController {
 
     return res.json({
       id,
+      shop_name,
+      tel,
+      cel,
       name,
       email,
       identifier,
