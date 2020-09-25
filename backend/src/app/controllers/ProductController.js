@@ -6,6 +6,32 @@ import CancelProductService from '../services/CancelProductService';
 import CreateProductService from '../services/CreateProductService';
 
 class ProductController {
+  async indexMobile(req, res) {
+    const { page = 1 } = req.query;
+
+    const products = await Product.findAll({
+      attributes: ['id', 'name_product', 'price', 'canceled_at'],
+      limit: 20,
+      offset: (page - 1) * 20,
+      include: [
+        {
+          model: User,
+          as: 'provider',
+          attributes: ['id', 'name'],
+          include: [
+            {
+              model: File,
+              as: 'avatar',
+              attributes: ['id', 'path', 'url'],
+            },
+          ],
+        },
+      ],
+    });
+
+    return res.json(products);
+  }
+
   async index(req, res) {
     const { page = 1 } = req.query;
 

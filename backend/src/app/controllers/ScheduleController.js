@@ -1,6 +1,7 @@
 import { startOfDay, endOfDay, parseISO } from 'date-fns';
 import { Op } from 'sequelize';
 import Appointment from '../models/Appointment';
+import Product from '../models/Product';
 import User from '../models/User';
 
 class ScheduleController {
@@ -32,6 +33,11 @@ class ScheduleController {
           model: User,
           as: 'user',
           attributes: ['name'],
+        },
+        {
+          model: Product,
+          as: 'product',
+          attributes: ['id', 'name_product', 'price', 'provider_id'],
         },
       ],
       order: ['date'],

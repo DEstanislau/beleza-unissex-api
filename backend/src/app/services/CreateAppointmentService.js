@@ -1,4 +1,4 @@
-import { startOfHour, parseISO, isBefore, format } from 'date-fns';
+import { startOfHour, parseISO, isBefore, format, subHours } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
 import User from '../models/User';
@@ -9,7 +9,7 @@ import Appointment from '../models/Appointment';
 import Notification from '../schemas/Notification';
 
 class CreateAppointmentService {
-  async run({ provider_id, user_id, date }) {
+  async run({ provider_id, user_id, date, product_id }) {
     const checkIsProvider = await User.findOne({
       where: { id: provider_id, provider: true },
     });
@@ -44,6 +44,7 @@ class CreateAppointmentService {
       user_id,
       provider_id,
       date,
+      product_id,
     });
 
     const user = await User.findByPk(user_id);

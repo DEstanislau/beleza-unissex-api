@@ -24,6 +24,9 @@ class ProviderController {
         'city',
         'uf',
         'avatar_id',
+        'cel',
+        'tel',
+        'shop_name',
       ],
       include: [
         {

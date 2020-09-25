@@ -1,6 +1,7 @@
 import Appointment from '../models/Appointment';
 import User from '../models/User';
 import File from '../models/File';
+import Product from '../models/Product';
 
 import CreateAppointmentService from '../services/CreateAppointmentService';
 import CancelAppointmentService from '../services/CancelAppointmentService';
@@ -27,9 +28,27 @@ class AppointmentController {
       offset: (page - 1) * 20,
       include: [
         {
+          model: Product,
+          as: 'product',
+          attributes: ['id', 'name_product', 'price', 'provider_id'],
+        },
+        {
           model: User,
           as: 'provider',
-          attributes: ['id', 'name'],
+          attributes: [
+            'id',
+            'shop_name',
+            'name',
+            'email',
+            'tel',
+            'cel',
+            'cep',
+            'address',
+            'house_number',
+            'district',
+            'city',
+            'uf',
+          ],
           include: [
             {
               model: File,
@@ -47,12 +66,13 @@ class AppointmentController {
   }
 
   async store(req, res) {
-    const { provider_id, date } = req.body;
+    const { provider_id, date, product_id } = req.body;
 
     const appointment = await CreateAppointmentService.run({
       provider_id,
       user_id: req.userId,
       date,
+      product_id,
     });
 
     return res.json(appointment);

@@ -55,6 +55,7 @@ routes.post(
 routes.delete('/appointments/:id', AppointmentController.delete);
 
 routes.get('/products', ProductController.index);
+routes.get('/productsm', ProductController.indexMobile);
 routes.post('/products', ProductController.store);
 routes.delete('/products/:id', ProductController.delete);
 
