@@ -12,6 +12,10 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
+      shop_name: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       name: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -52,6 +56,21 @@ module.exports = {
       },
       uf: {
         type: Sequelize.STRING,
+        allowNull: true,
+      },
+      cel: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      tel: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      avatar_id: {
+        type: Sequelize.INTEGER,
+        references: { model: 'files', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelet: 'SET NULL',
         allowNull: true,
       },
       created_at: {

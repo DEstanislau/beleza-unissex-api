@@ -10,7 +10,7 @@ class ProductController {
     const { page = 1 } = req.query;
 
     const products = await Product.findAll({
-      attributes: ['id', 'name_product', 'price', 'canceled_at'],
+      attributes: ['id', 'name_product', 'price'],
       limit: 20,
       offset: (page - 1) * 20,
       include: [
@@ -36,8 +36,8 @@ class ProductController {
     const { page = 1 } = req.query;
 
     const products = await Product.findAll({
-      where: { provider_id: req.userId, canceled_at: null },
-      attributes: ['id', 'name_product', 'price', 'canceled_at'],
+      where: { provider_id: req.userId },
+      attributes: ['id', 'name_product', 'price'],
       limit: 20,
       offset: (page - 1) * 20,
       include: [
