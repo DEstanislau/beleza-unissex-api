@@ -7,6 +7,7 @@ class Appointment extends Model {
       {
         date: Sequelize.DATE,
         canceled_at: Sequelize.DATE,
+        rating_appointment: Sequelize.DOUBLE,
         past: {
           type: Sequelize.VIRTUAL,
           get() {

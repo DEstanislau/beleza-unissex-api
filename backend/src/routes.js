@@ -11,10 +11,11 @@ import FileController from './app/controllers/FileController';
 import ProviderController from './app/controllers/ProviderController';
 import AppointmentController from './app/controllers/AppointmentController';
 import ScheduleController from './app/controllers/ScheduleController';
-import NotificationController from './app/controllers/NotificationController';
 import AvailableController from './app/controllers/AvailableController';
 import ResetController from './app/controllers/ResetController';
 import ProductController from './app/controllers/ProductController';
+import NotificationController from './app/controllers/NotificationController';
+import RatingController from './app/controllers/RatingController';
 
 import ValidateUserStore from './app/validators/UserStore';
 import ValidateUserUpdate from './app/validators/UserUpdate';
@@ -38,6 +39,8 @@ routes.post('/users', ValidateUserStore, UserController.store);
 routes.post('/sessions', ValidateSessionStore, SessionController.store);
 
 routes.put('/reset', ValidateForgotPassword, ResetController.forgotPassword);
+
+routes.put('/ratings/:providerId/:appointmentId', RatingController.update);
 
 routes.use(authMiddleware);
 

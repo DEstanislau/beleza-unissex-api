@@ -27,6 +27,7 @@ class ProviderController {
         'cel',
         'tel',
         'shop_name',
+        'rating',
       ],
       include: [
         {
