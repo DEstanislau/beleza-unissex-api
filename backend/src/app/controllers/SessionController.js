@@ -24,6 +24,9 @@ class SessionController {
 
     const {
       id,
+      shop_name,
+      tel,
+      cel,
       name,
       identifier,
       cep,
@@ -39,6 +42,9 @@ class SessionController {
     return res.json({
       user: {
         id,
+        shop_name,
+        tel,
+        cel,
         name,
         email,
         identifier,

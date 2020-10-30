@@ -1,28 +1,27 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('ratings', {
+    return queryInterface.createTable('favorites', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
-      stars: {
-        type: Sequelize.DOUBLE,
-        allowNull: false,
-        defaultValue: 0,
-      },
-      count: {
+      user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        defaultValue: 0,
       },
       provider_id: {
         type: Sequelize.INTEGER,
         references: { model: 'users', key: 'id' },
         onUpdate: 'CASCADE',
         onDelet: 'SET NULL',
-        allowNull: true,
+        allowNull: false,
+      },
+      favorited: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+        allowNull: false,
       },
       created_at: {
         type: Sequelize.DATE,
@@ -36,6 +35,6 @@ module.exports = {
   },
 
   down: (queryInterface) => {
-    return queryInterface.dropTable('ratings');
+    return queryInterface.dropTable('favorites');
   },
 };

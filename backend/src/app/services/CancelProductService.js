@@ -17,7 +17,7 @@ class CancelProductService {
       throw new Error("You don't have permission to remove this Service.");
     }
 
-    await product.destroy();
+    product.destroy();
 
     return product;
   }

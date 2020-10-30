@@ -32,6 +32,11 @@ module.exports = {
         onDelet: 'SET NULL',
         allowNull: true,
       },
+      rating_appointment: {
+        type: Sequelize.DOUBLE,
+        defaultValue: 0,
+        allowNull: false,
+      },
       canceled_at: {
         type: Sequelize.DATE,
       },

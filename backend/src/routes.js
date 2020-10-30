@@ -16,6 +16,7 @@ import ResetController from './app/controllers/ResetController';
 import ProductController from './app/controllers/ProductController';
 import NotificationController from './app/controllers/NotificationController';
 import RatingController from './app/controllers/RatingController';
+import FavoriteController from './app/controllers/FavoriteController';
 
 import ValidateUserStore from './app/validators/UserStore';
 import ValidateUserUpdate from './app/validators/UserUpdate';
@@ -39,8 +40,6 @@ routes.post('/users', ValidateUserStore, UserController.store);
 routes.post('/sessions', ValidateSessionStore, SessionController.store);
 
 routes.put('/reset', ValidateForgotPassword, ResetController.forgotPassword);
-
-routes.put('/ratings/:providerId/:appointmentId', RatingController.update);
 
 routes.use(authMiddleware);
 
@@ -68,5 +67,10 @@ routes.get('/notifications', NotificationController.index);
 routes.put('/notifications/:id', NotificationController.update);
 
 routes.post('/files', upload.single('file'), FileController.store);
+
+routes.put('/ratings/:providerId/:appointmentId', RatingController.update);
+
+// routes.get('/favorites/:providerId', FavoriteController.index);
+// routes.post('/favorites/:providerId/', FavoriteController.store);
 
 export default routes;
